@@ -2,7 +2,7 @@
 /*******************************************
 php image timelaps gallery for 3d-printing
 based on esp32cam
-
+https://github.com/whoim2/esp32cam-timelaps-php-gallery
 ********************************************/
 //settings
 date_default_timezone_set('Europe/Moscow');
@@ -50,7 +50,7 @@ if(isset($_GET['download'])) {
 //part for browser
 $folders = scandir($folder, SCANDIR_SORT_DESCENDING);
 foreach($folders as $dir)
-  if($dir <> '.' && $dir <> '..') {
+  if($dir <> '.' && $dir <> '..' && $dir <> 'README') {
       $files = scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING);
       $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
       print '<a href="'.$link.'?download='.$dir.'"><img src="'.$link.$data_folder.$dir.'/'.$files[2].'" title="'.date("d.m.Y H:i:s", $dir).'"  width="100" /></a>&nbsp;';
