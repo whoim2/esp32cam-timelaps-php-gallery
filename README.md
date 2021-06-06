@@ -5,4 +5,4 @@ based on arduino code from https://github.com/robotzero1/esp32cam-timelapse and 
 
 im use esp32cam from Aliexpress: https://aliexpress.ru/item/1005002035573150.html
 
-example animated gif from night work at this project: https://yadi.sk/i/YlqSusMRvUKd4g (open original or download for animate view)
+example of work: https://yadi.sk/i/rwDl-g6lLueByA
