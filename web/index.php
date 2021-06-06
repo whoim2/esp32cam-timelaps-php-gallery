@@ -10,6 +10,7 @@ $frames_delay = 10;
 $gif_loop = 1;
 $rotate = 270; //0, 90, 180, 270
 $data_folder = 'data/'; //with slashes at last char
+$dmode = 'gif'; //'gif' or 'avi'. Avi need ffmpeg for example cmd: ffmpeg -framerate 10 -pattern_type glob -i "*.jpg" output.avi
 
 //part for load image from esp32cam
 $folder = getcwd().'/'.$data_folder;
@@ -38,37 +39,45 @@ if($size > 0 && $_SERVER["CONTENT_TYPE"] == 'image/jpg') { //if stream not empty
 
 //part for download animated gif
 if(isset($_GET['download'])) {
-  include('inc/AnimGif.php');
-  ini_set('memory_limit', '1024M');
-  set_time_limit(300);
-  $dir = $_GET['download'];
-  $files = scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING);
-  if(sizeof($files) < 4) die("few images for building animation");
-  $frames = array();
-  $durations = array();
-  foreach($files as $file)
-    if($file <> '.' && $file <> '..') {
-        $frames[] = $folder.'/'.$dir.'/'.$file;
-        $durations[] = $frames_delay;
-    }
-  $anim = new GifCreator\AnimGif();
-  $anim->create($frames, $durations, $gif_loop);
-  $gif = $anim->get();
-  header("Content-type: image/gif");
-  header("Content-disposition: attachment; filename=\"".$dir.".gif\""); 
-  print $gif;
+ $dir = $_GET['download'];
+ if($dmode == 'gif') {
+    include('inc/AnimGif.php');
+    ini_set('memory_limit', '1024M');
+    set_time_limit(300);
+    $files = preg_grep('~\.(jpeg|jpg|png)$~', scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING));
+    if(sizeof($files) < 4) die("few images for building animation");
+    $frames = array();
+    $durations = array();
+    foreach($files as $file)
+      if($file <> '.' && $file <> '..') {
+          $frames[] = $folder.'/'.$dir.'/'.$file;
+          $durations[] = $frames_delay;
+      }
+    $anim = new GifCreator\AnimGif();
+    $anim->create($frames, $durations, $gif_loop);
+    $gif = $anim->get();
+    header("Content-type: image/gif");
+    header("Content-disposition: attachment; filename=\"".$dir.".gif\""); 
+    print $gif;
+}
+else if($dmode = 'avi') {
+    shell_exec('ffmpeg -y -framerate 10 -pattern_type glob -i "'.$folder.'/'.$dir.'/*.jpg" '.$folder.'/'.$dir.'/'.$dir.'.avi');
+    $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]".explode('?', $_SERVER['REQUEST_URI'], 2)[0];
+    header('HTTP/1.1 301 Moved Permanently'); 
+    header('Location: '.$link.$data_folder.$dir.'/'.$dir.'.avi');
+}
   exit(0);
 }
 //part for browser
 $folders = scandir($folder, SCANDIR_SORT_DESCENDING);
 foreach($folders as $dir)
   if($dir <> '.' && $dir <> '..') {
-      $files = scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING);
+      $files = preg_grep('~\.(jpeg|jpg|png)$~', scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING));
       if(sizeof($files) > 2) {
-        $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]".explode('?', $_SERVER['REQUEST_URI'], 2)[0];
         print '<a href="'.$link.'?download='.$dir.'"><img src="'.$link.$data_folder.$dir.'/'.$files[sizeof($files)-1].'" title="'.date("d.m.Y H:i:s", $dir).'"  width="200" /></a>&nbsp;';
       } else {
-        rmdir($folder.'/'.$dir);
+        //rmdir($folder.'/'.$dir);
       }
 }
 ?>
