@@ -24,9 +24,15 @@ if(file_exists($f.'README')) unlink($f.'README');
 $received = file_get_contents('php://input'); //try to get input stream
 $size = strlen($received);
 if($size > 0 && $_SERVER["CONTENT_TYPE"] == 'image/jpg') { //if stream not empty and this jpeg image
-  file_put_contents($f.time().'.jpg', $received); //save file
-  if($rotate > 0) //need rotate
-  imagejpeg(imagerotate(imagecreatefromjpeg($f.time().'.jpg'), $rotate, 0), $f.time().'.jpg');  
+  $f .=  time().'.jpg';
+  file_put_contents($f, $received); //save file
+  if($rotate > 0) {//need rotate
+    $i = false;
+    while(!$i) {
+      $i = imagerotate(imagecreatefromjpeg($f), $rotate, 0);
+    }
+    imagejpeg($i, $f);
+  }
   exit(0);
 }
 
