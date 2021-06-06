@@ -50,7 +50,7 @@ FRAMESIZE_QSXGA,    // 2560x1920
 #define TRIGGER_STATE HIGH //HIGH or LOW
 #define TRIGGER_TIME_LIMIT 5000 //minimal timeout between triggers
 #define SERIAL_DEBUG
-#define TRIGGER_PIN 13
+#define TRIGGER_PIN 12
 
 
 long trigger_millis = 0;
