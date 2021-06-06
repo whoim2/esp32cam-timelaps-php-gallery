@@ -8,6 +8,7 @@ based on esp32cam
 date_default_timezone_set('Europe/Moscow');
 $frames_delay = 10;
 $gif_loop = 1;
+$rotate = 270; //0, 90, 180, 270
 $data_folder = 'data/'; //with slashes at last char
 
 //part for load image from esp32cam
@@ -24,6 +25,8 @@ $received = file_get_contents('php://input'); //try to get input stream
 $size = strlen($received);
 if($size > 0 && $_SERVER["CONTENT_TYPE"] == 'image/jpg') { //if stream not empty and this jpeg image
   file_put_contents($f.time().'.jpg', $received); //save file
+  if($rotate > 0) //need rotate
+  imagejpeg(imagerotate(imagecreatefromjpeg($f.time().'.jpg'), $rotate, 0), $f.time().'.jpg');  
   exit(0);
 }
 
@@ -34,6 +37,7 @@ if(isset($_GET['download'])) {
   set_time_limit(300);
   $dir = $_GET['download'];
   $files = scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING);
+  if(sizeof($files) < 4) die("few images for building animation");
   $frames = array();
   $durations = array();
   foreach($files as $file)
@@ -52,11 +56,13 @@ if(isset($_GET['download'])) {
 //part for browser
 $folders = scandir($folder, SCANDIR_SORT_DESCENDING);
 foreach($folders as $dir)
-  if($dir <> '.' && $dir <> '..' && $dir <> 'README') {
+  if($dir <> '.' && $dir <> '..') {
       $files = scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING);
       if(sizeof($files) > 2) {
         $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        print '<a href="'.$link.'?download='.$dir.'"><img src="'.$link.$data_folder.$dir.'/'.$files[2].'" title="'.date("d.m.Y H:i:s", $dir).'"  width="100" /></a>&nbsp;';
+        print '<a href="'.$link.'?download='.$dir.'"><img src="'.$link.$data_folder.$dir.'/'.$files[sizeof($files)-1].'" title="'.date("d.m.Y H:i:s", $dir).'"  width="200" /></a>&nbsp;';
+      } else {
+        rmdir($folder.'/'.$dir);
       }
 }
 ?>
