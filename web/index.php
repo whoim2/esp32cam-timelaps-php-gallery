@@ -30,7 +30,8 @@ if($size > 0 && $_SERVER["CONTENT_TYPE"] == 'image/jpg') { //if stream not empty
 //part for download animated gif
 if(isset($_GET['download'])) {
   include('inc/AnimGif.php');
-  ini_set('memory_limit', '512M');
+  ini_set('memory_limit', '1024M');
+  set_time_limit(300);
   $dir = $_GET['download'];
   $files = scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING);
   $frames = array();
