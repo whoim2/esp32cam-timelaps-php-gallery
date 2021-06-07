@@ -6,7 +6,9 @@ esp32cam arduino and php-based scripts for cloud 3d-printing timelapses, may cre
 Based on arduino code from https://github.com/robotzero1/esp32cam-timelapse and animated gif php library from https://github.com/lunakid/AnimGif
 im use esp32cam from Aliexpress: https://aliexpress.ru/item/1005002035573150.html
 
-example of work: https://yadi.sk/i/rwDl-g6lLueByA
+example of work GIF: https://yadi.sk/i/rwDl-g6lLueByA
+
+video mpeg: https://youtu.be/wQOmJVJ83b4
 
 
 Example, pin mapping and z-layer-change gcode for RRF on SKR1.3:
