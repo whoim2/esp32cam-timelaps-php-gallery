@@ -13,7 +13,7 @@ $rotate = 270; //0, 90, 180, 270
 //
 $data_folder = 'data/'; //with slashes at last char
 $dmode = 'video'; //'gif' or 'video'. Avi need ffmpeg for example cmd: ffmpeg -framerate 10 -pattern_type glob -i "*.jpg" output.avi
-$video_format = "mpg"; //avi, mpg. Use ffmpeg --formats for details
+$video_format = "mov"; //avi, mpg, wmv, mov. Use ffmpeg --codesc for details
 
 //part for load image from esp32cam
 $folder = getcwd().'/'.$data_folder;
@@ -86,7 +86,7 @@ foreach($folders as $dir)
         $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]".explode('?', $_SERVER['REQUEST_URI'], 2)[0];
         print '<a href="'.$link.'?download='.$dir.'&rand='.rand(10000, 99999).'"><img src="'.$link.$data_folder.$dir.'/'.$files[sizeof($files)-1].'" title="'.date("d.m.Y H:i:s", $dir).'"  width="200" /></a>&nbsp;';
       } else {
-        //rmdir($folder.'/'.$dir);
+        if(time() - $dir > 86400) rmdir($folder.'/'.$dir); //delete folder where <2 pictures after 24 hour
       }
 }
 ?>
