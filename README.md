@@ -15,6 +15,7 @@ M42 P1 S1
 G4 P100
 M42 P1 S0
 
+for Cura slicer, script adding z-change layer code: https://github.com/whoim2/esp32cam-timelaps-php-gallery/blob/main/gcode.cmd
 
 
 based on arduino code from https://github.com/robotzero1/esp32cam-timelapse and animated gif php library from https://github.com/lunakid/AnimGif
