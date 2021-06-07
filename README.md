@@ -5,18 +5,12 @@ Example, pin mapping and z-layer-change gcode for RRF on SKR1.3:
 
 
 config.g:
-
 M950 P0 C"e1heat" //esp32 and light power mosfet
-
 M42 P0 S0
-
 M950 P1 C"xstop" //trigger pin x- to 12 pin esp
-
 M42 P1 S0
 
-
 slicer-z-layer-gcode:
-
 M42 P1 S1
 G4 P100
 M42 P1 S0
