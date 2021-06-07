@@ -21,7 +21,7 @@ M950 P1 C"xstop" //trigger pin x- to 12 pin esp
 M42 P1 S0
 
 
-slicer-z-layer-gcode:
+slicer-z-layer-change-gcode:
 
 M42 P1 S1
 
