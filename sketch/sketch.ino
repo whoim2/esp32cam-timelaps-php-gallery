@@ -99,7 +99,7 @@ void setup()
   pinMode(TRIGGER_PIN, INPUT);
   pinMode(33, OUTPUT); //led
   digitalWrite(33, LOW); //led on
-
+  pinMode(4, OUTPUT); //flash led
 
 
   // SD camera init
@@ -485,7 +485,10 @@ void loop()
         #ifdef SERIAL_DEBUG
         Serial.println("Capture triggered");
         #endif
+        digitalWrite(4, HIGH); //LED FLASH
+        delay(10);
         fb = esp_camera_fb_get();
+        digitalWrite(4, LOW);
         save_photo();
         take_send_photo();
         trigger_millis = millis();
