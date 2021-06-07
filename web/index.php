@@ -12,7 +12,7 @@ $gif_loop = 1;
 $rotate = 270; //0, 90, 180, 270
 //
 $data_folder = 'data/'; //with slashes at last char
-$dmode = 'video'; //'gif' or 'video'. Avi need ffmpeg for example cmd: ffmpeg -framerate 10 -pattern_type glob -i "*.jpg" output.avi
+$dmode = 'video'; //'gif' or 'video'. Video need ffmpeg, for example cmd: ffmpeg -framerate 10 -pattern_type glob -i "*.jpg" output.avi
 $video_format = "mov"; //avi, mpg, wmv, mov. Use ffmpeg --codesc for details
 
 //part for load image from esp32cam
