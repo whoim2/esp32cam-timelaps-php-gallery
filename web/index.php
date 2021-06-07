@@ -2,7 +2,7 @@
 /*******************************************
 php image timelaps gallery for 3d-printing
 based on esp32cam
-
+https://github.com/whoim2/esp32cam-timelaps-php-gallery
 ********************************************/
 //settings
 date_default_timezone_set('Europe/Moscow');
