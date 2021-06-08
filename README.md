@@ -2,7 +2,7 @@
 esp32cam arduino and php-based scripts for cloud 3d-printing timelapses, may create animated gif or video-file from images, recieved at esp32cam on trigger (layer change) or timeout.
 
 ![esp32cam](https://github.com/whoim2/esp32cam-timelaps-php-gallery/raw/main/Screenshot_2.png)
-![esp32cam](https://github.com/whoim2/esp32cam-timelaps-php-gallery/raw/main/Screenshot_6.png)
+![esp32cam](https://github.com/whoim2/esp32cam-timelaps-php-gallery/raw/main/Screenshot_5.png)
 
 Based on arduino code from https://github.com/robotzero1/esp32cam-timelapse and animated gif php library from https://github.com/lunakid/AnimGif
 
