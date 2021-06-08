@@ -9,9 +9,7 @@ im use esp32cam from Aliexpress: https://aliexpress.ru/item/1005002035573150.htm
 
 example of work GIF: https://yadi.sk/i/rwDl-g6lLueByA
 
-video mov: https://youtu.be/k5FLd7WKuOI
-
-video mpeg: https://youtu.be/wQOmJVJ83b4
+video mov: https://youtu.be/k5FLd7WKuOI mpeg: https://youtu.be/wQOmJVJ83b4
 
 
 __Example, pin mapping and z-layer-change gcode for RRF on SKR1.3:__
