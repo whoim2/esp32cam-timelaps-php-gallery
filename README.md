@@ -13,7 +13,7 @@ example of work GIF: https://yadi.sk/i/rwDl-g6lLueByA
 video mov: https://youtu.be/k5FLd7WKuOI mpeg: https://youtu.be/wQOmJVJ83b4
 
 
-__Example, pin mapping and z-layer-change gcode for RRF on SKR1.3:__
+__Example, pin mapping and z-layer-change gcode for RRF (https://github.com/gloomyandy/RepRapFirmware) on SKR1.3:__
 
 __config.g:__
 ```
