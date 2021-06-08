@@ -42,12 +42,12 @@ if($size > 0 && $_SERVER["CONTENT_TYPE"] == 'image/jpg') { //if stream not empty
 
 //part for download animated gif
 if(isset($_GET['download'])) {
+ ini_set('memory_limit', '1024M');
+ set_time_limit(300);
  $dir = $_GET['download'];
  if($dmode == 'gif') {
     include('inc/AnimGif.php');
-    ini_set('memory_limit', '1024M');
-    set_time_limit(300);
-    $files = preg_grep('~\.(jpeg|jpg|png)$~', scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING));
+    $files = array_values(preg_grep('~\.(jpeg|jpg|png)$~', scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING)));
     if(sizeof($files) < 4) die("few images for building animation");
     $frames = array();
     $durations = array();
@@ -81,8 +81,8 @@ else if($dmode = 'video') {
 $folders = scandir($folder, SCANDIR_SORT_DESCENDING);
 foreach($folders as $dir)
   if($dir <> '.' && $dir <> '..') {
-      $files = preg_grep('~\.(jpeg|jpg|png)$~', scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING));
-      if(sizeof($files) > 2) {
+      $files = array_values(preg_grep('~\.(jpeg|jpg|png)$~', scandir($folder.'/'.$dir, SCANDIR_SORT_ASCENDING)));
+      if(sizeof($files) > 0) {
         $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]".explode('?', $_SERVER['REQUEST_URI'], 2)[0];
         print '<a href="'.$link.'?download='.$dir.'&rand='.rand(10000, 99999).'"><img src="'.$link.$data_folder.$dir.'/'.$files[sizeof($files)-1].'" title="'.date("d.m.Y H:i:s", $dir).'"  width="200" /></a>&nbsp;';
       } else {
