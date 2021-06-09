@@ -8,6 +8,8 @@ Based on arduino code from https://github.com/robotzero1/esp32cam-timelapse and 
 
 im use esp32cam from Aliexpress: https://aliexpress.ru/item/1005002035573150.html
 
+and 5v dc-dc stepdown: https://a.aliexpress.com/_A5k3OF
+
 example of work GIF: https://yadi.sk/i/rwDl-g6lLueByA
 
 video mov: https://youtu.be/k5FLd7WKuOI mpeg: https://youtu.be/wQOmJVJ83b4
