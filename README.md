@@ -41,3 +41,7 @@ M42 P0 S0
 
 __for Cura slicer__
 script adding z-change layer code: https://github.com/whoim2/esp32cam-timelaps-php-gallery/blob/main/gcode.cmd
+
+OR
+
+use this postscript cura plugin (tested with 4.8 cura): https://github.com/whoim2/esp32cam-timelaps-php-gallery/raw/main/TimeLapse.py
