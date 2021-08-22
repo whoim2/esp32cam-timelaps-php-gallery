@@ -17,6 +17,10 @@ example of work GIF: https://yadi.sk/i/rwDl-g6lLueByA
 
 video mov: https://youtu.be/k5FLd7WKuOI mpeg: https://youtu.be/wQOmJVJ83b4
 
+web screenshot: 
+
+![esp32cam](https://github.com/whoim2/esp32cam-timelaps-php-gallery/raw/main/Screenshot_8.png)
+
 
 __Example, pin mapping and z-layer-change gcode for RRF (https://github.com/gloomyandy/RepRapFirmware) on SKR1.3:__
 
